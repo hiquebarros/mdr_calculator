@@ -32,6 +32,10 @@
   padding: 30px;
 }
 
+span{
+  color: red;
+}
+
 @media (min-width: 768px){
   .container {
     flex-direction: row;
