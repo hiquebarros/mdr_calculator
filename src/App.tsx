@@ -6,6 +6,7 @@ import axios from "axios"
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import load from "./assets/load.svg"
 
 interface IResponse {
   amount: number
@@ -27,6 +28,7 @@ function App() {
   const [isResponseOn, setIsResponseOn] = React.useState<boolean>(false)
   const [isDaysOn, setIsDaysOn] = React.useState<boolean>(false)
   const [responseObject, setResponseObject] = React.useState<IResponse>()
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   const formatData = (data: IResponse) => {
     let defaultData = {
@@ -58,10 +60,11 @@ function App() {
 
     setIsResponseOn(true)
     setResponseObject(data)
+    setIsLoading(false)
   }
 
   const onSubmitFunction = async (data: any) => {
-
+    setIsLoading(true)
     let newData = formatData(data)
 
     await axios.post('https://frontend-challenge-7bu3nxh76a-uc.a.run.app?', newData)
@@ -79,7 +82,9 @@ function App() {
             <InputComponent error={errors.installments?.message} register={register} label={"Em quantas parcelas *"} name={"installments"} />
             <InputComponent error={errors.mdr?.message} register={register} label={"Informe o percentual de MDR*"} name={"mdr"} />
             <InputComponent error={errors.days?.message} register={register} label={"Dias à serem calculados as antecipações"} name={"days"} />
-            <button type='submit'>Simular</button>
+            <button type='submit'>
+              {isLoading ? (<img src={load}/>) : (<>Simular</>)}
+              </button>
           </form>
         </div>
         <div className="container--rigth">
