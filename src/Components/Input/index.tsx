@@ -1,10 +1,10 @@
 import { Container, Input } from './styles';
 
-const InputComponent = ({label}: any) => {
+const InputComponent = ({register, label, name}: any) => {
     return (
         <Container>
             <label>{label}</label>
-            <Input />
+            <Input {...register(name)} />
         </Container>
     );
 }
