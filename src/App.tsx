@@ -67,7 +67,7 @@ function App() {
     setIsLoading(true)
     let newData = formatData(data)
 
-    await axios.post('https://frontend-challenge-7bu3nxh76a-uc.a.run.app?', newData)
+    await axios.post('https://frontend-challenge-7bu3nxh76a-uc.a.run.app', newData)
       .then((response) => handleResponse(response.data))
       .catch((err) => console.log(err))
   }
