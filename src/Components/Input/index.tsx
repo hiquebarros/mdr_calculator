@@ -1,10 +1,11 @@
 import { Container, Input } from './styles';
 
-const InputComponent = ({register, label, name}: any) => {
+const InputComponent = ({error, register, label, name}: any) => {
     return (
         <Container>
             <label>{label}</label>
             <Input {...register(name)} />
+            <span>{error && error}</span>
         </Container>
     );
 }
