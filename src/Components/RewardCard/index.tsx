@@ -10,7 +10,7 @@ const RewardCard = ({date, value, response}: IRewardCardProps) => {
     return (
         <Container>
             <h3>{date}:</h3>
-            {response ? (<h3> R$ {value && value.toString()},00</h3>) : (null)}
+            {response ? (<h3> R$ {value && (value / 100).toFixed(2).toString().replace('.', ",")}</h3>) : (null)}
         </Container>
     );
 }

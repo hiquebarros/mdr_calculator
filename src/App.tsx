@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 import InputComponent from './Components/Input';
 import RewardCard from './Components/RewardCard';
@@ -7,69 +7,36 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import load from "./assets/load.svg"
+import { AppContext } from './contexts/app.context';
+import { Toaster } from 'react-hot-toast';
 
 interface IResponse {
   amount: number
   installments: number
   mdr: number
-  days?: any 
+  days?: any
 }
 
 function App() {
 
   const formSchema = yup.object().shape({
-    amount: yup.string().required("Campo obrigatório!").matches(/^[1-9]\d{3,}$/, 'Apenas números a partir de 1000'),
+    amount: yup.string().required("Campo obrigatório!"),
     installments: yup.string().required("Campo obrigatório!").matches(/(^0?[1-9]$)|(^1[0-2]$)/, 'Apenas números entre 1 e 12'),
     mdr: yup.string().required("Campo obrigatório!").matches(/^[1-9][0-9]?$|^100$/, 'Apenas números entre 1 e 100'),
-    days: yup.string(),
+    days: yup.string().matches(/^(([0-9 ](,)?)*)+$/, 'Siga o exemplo: 10, 15, 25')
   });
 
-  const { register, handleSubmit, formState: { errors } } = useForm<IResponse>({resolver: yupResolver(formSchema)});
-  const [isResponseOn, setIsResponseOn] = React.useState<boolean>(false)
-  const [isDaysOn, setIsDaysOn] = React.useState<boolean>(false)
-  const [responseObject, setResponseObject] = React.useState<IResponse>()
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
-
-  const formatData = (data: IResponse) => {
-    let defaultData = {
-      amount: data.amount,
-      installments: data.installments,
-      mdr: data.mdr
-    }
-
-    if(data.days === ""){
-      return defaultData
-    }
-    
-    let arrayOfDays = data.days && data.days.split(',')
-    data.days = arrayOfDays
-
-    return data
-  }
-
-  const handleResponse = (data: any) => {
-
-    let dataKeys = Object.keys(data)    
-    let defaultResponseKeys = ['1','15','30','90']
-
-    let arrayComparison = dataKeys.length === defaultResponseKeys.length && dataKeys.every((value, index) => value === defaultResponseKeys[index])
-
-    if (!arrayComparison) {
-      setIsDaysOn(true)
-    }
-
-    setIsResponseOn(true)
-    setResponseObject(data)
-    setIsLoading(false)
-  }
+  const { register, handleSubmit, formState: { errors } } = useForm<IResponse>({ resolver: yupResolver(formSchema) });
+  const { setIsLoading, formatData, handleResponse, isLoading, isDaysOn, isResponseOn, responseObject, ajustAmount, handleError } = useContext(AppContext);
 
   const onSubmitFunction = async (data: any) => {
     setIsLoading(true)
-    let newData = formatData(data)
+    let amountAjustedData = ajustAmount(data)
+    let newData = formatData(amountAjustedData)
 
     await axios.post('https://frontend-challenge-7bu3nxh76a-uc.a.run.app', newData)
       .then((response) => handleResponse(response.data))
-      .catch((err) => console.log(err))
+      .catch((err) => handleError(err.response))
   }
 
   return (
@@ -81,10 +48,10 @@ function App() {
             <InputComponent error={errors.amount?.message} register={register} label={"Informe o valor da venda *"} name={"amount"} />
             <InputComponent error={errors.installments?.message} register={register} label={"Em quantas parcelas *"} name={"installments"} />
             <InputComponent error={errors.mdr?.message} register={register} label={"Informe o percentual de MDR*"} name={"mdr"} />
-            <InputComponent error={errors.days?.message} register={register} label={"Dias à serem calculados as antecipações"} name={"days"} />
+            <InputComponent error={errors.days?.message} register={register} label={"Dias à serem calculadas as antecipações"} name={"days"} />
             <button type='submit'>
-              {isLoading ? (<img src={load}/>) : (<>Simular</>)}
-              </button>
+              {isLoading ? (<img src={load} alt="loading" />) : (<>Simular</>)}
+            </button>
           </form>
         </div>
         <div className="container--rigth">
@@ -101,9 +68,13 @@ function App() {
               return <RewardCard key={index} response={isResponseOn} date={`Em ${item} dias`} value={Object.values(responseObject)[index]} />
             })
           )}
-
         </div>
       </div>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        gutter={8}
+      />
     </div>
   );
 }
