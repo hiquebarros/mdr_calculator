@@ -1,0 +1,61 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-color: #dfe6eb;
+  border-radius: 4px;
+}
+
+.container--left{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 30px;
+}
+
+.container--rigth{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f7f9fa;
+  padding: 30px;
+}
+
+span{
+  color: red;
+}
+
+button{
+  background-color: #f5f7fa;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  margin: 20px 0 0 0;
+  font-size: large;
+  cursor: pointer;
+}
+
+button:active{
+  transform: scale(0.98);
+}
+
+img{
+  height: 25px;
+}
+
+@media (min-width: 768px){
+  .container {
+    flex-direction: row;
+  }
+}
