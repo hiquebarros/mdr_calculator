@@ -59,7 +59,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
             return defaultData
         }
 
-        let arrayOfDays = data.days && data.days.split(',')
+        let arrayOfDays = data.days && data.days.split(',').splice(0,10)
         data.days = arrayOfDays
 
         return data
