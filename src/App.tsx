@@ -48,7 +48,7 @@ function App() {
             <InputComponent error={errors.amount?.message} register={register} label={"Informe o valor da venda *"} name={"amount"} />
             <InputComponent error={errors.installments?.message} register={register} label={"Em quantas parcelas *"} name={"installments"} />
             <InputComponent error={errors.mdr?.message} register={register} label={"Informe o percentual de MDR*"} name={"mdr"} />
-            <InputComponent error={errors.days?.message} register={register} label={"Dias à serem calculadas as antecipações"} name={"days"} />
+            <InputComponent error={errors.days?.message} register={register} label={"Dias a serem calculadas as antecipações"} name={"days"} />
             <button type='submit'>
               {isLoading ? (<img src={load} alt="loading" />) : (<>Simular</>)}
             </button>
@@ -58,10 +58,10 @@ function App() {
           <h2>VOCÊ RECEBERÁ</h2>
           {!isDaysOn ? (
             <>
-              <RewardCard response={isResponseOn} date={"Amanhã"} value={responseObject && Object.values(responseObject)[0]} />
-              <RewardCard response={isResponseOn} date={"Em 15 dias"} value={responseObject && Object.values(responseObject)[1]} />
-              <RewardCard response={isResponseOn} date={"Em 30 dias"} value={responseObject && Object.values(responseObject)[2]} />
-              <RewardCard response={isResponseOn} date={"Em 90 dias"} value={responseObject && Object.values(responseObject)[3]} />
+              <RewardCard response={isResponseOn} date={"Amanhã:"} value={responseObject && Object.values(responseObject)[0]} />
+              <RewardCard response={isResponseOn} date={"Em 15 dias:"} value={responseObject && Object.values(responseObject)[1]} />
+              <RewardCard response={isResponseOn} date={"Em 30 dias:"} value={responseObject && Object.values(responseObject)[2]} />
+              <RewardCard response={isResponseOn} date={"Em 90 dias:"} value={responseObject && Object.values(responseObject)[3]} />
             </>
           ) : (
             responseObject && Object.keys(responseObject).map((item, index) => {
