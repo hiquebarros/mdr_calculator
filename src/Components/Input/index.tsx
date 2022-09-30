@@ -4,7 +4,7 @@ const InputComponent = ({error, register, label, name}: any) => {
     return (
         <Container>
             <label>{label}</label>
-            <Input {...register(name)} />
+            <Input error={error} {...register(name)} />
             <span>{error && error}</span>
         </Container>
     );
