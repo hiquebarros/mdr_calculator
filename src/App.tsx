@@ -45,10 +45,10 @@ function App() {
         <div className="container--left">
           <h1>Simule sua antecipação</h1>
           <form onSubmit={handleSubmit(onSubmitFunction)}>
-            <InputComponent error={errors.amount?.message} register={register} label={"Informe o valor da venda *"} name={"amount"} />
-            <InputComponent error={errors.installments?.message} register={register} label={"Em quantas parcelas *"} name={"installments"} />
-            <InputComponent error={errors.mdr?.message} register={register} label={"Informe o percentual de MDR*"} name={"mdr"} />
-            <InputComponent error={errors.days?.message} register={register} label={"Dias a serem calculadas as antecipações"} name={"days"} />
+            <InputComponent id={1} error={errors.amount?.message} register={register} label={"Informe o valor da venda *"} name={"amount"} />
+            <InputComponent id={2} error={errors.installments?.message} register={register} label={"Em quantas parcelas *"} name={"installments"} />
+            <InputComponent id={3} error={errors.mdr?.message} register={register} label={"Informe o percentual de MDR*"} name={"mdr"} />
+            <InputComponent id={4} error={errors.days?.message} register={register} label={"Dias a serem calculadas as antecipações"} name={"days"} />
             <button type='submit'>
               {isLoading ? (<img src={load} alt="loading" />) : (<>Simular</>)}
             </button>
@@ -58,14 +58,14 @@ function App() {
           <h2>VOCÊ RECEBERÁ</h2>
           {!isDaysOn ? (
             <>
-              <RewardCard response={isResponseOn} date={"Amanhã:"} value={responseObject && Object.values(responseObject)[0]} />
-              <RewardCard response={isResponseOn} date={"Em 15 dias:"} value={responseObject && Object.values(responseObject)[1]} />
-              <RewardCard response={isResponseOn} date={"Em 30 dias:"} value={responseObject && Object.values(responseObject)[2]} />
-              <RewardCard response={isResponseOn} date={"Em 90 dias:"} value={responseObject && Object.values(responseObject)[3]} />
+              <RewardCard id={5} response={isResponseOn} date={"Amanhã:"} value={responseObject && Object.values(responseObject)[0]} />
+              <RewardCard id={5} response={isResponseOn} date={"Em 15 dias:"} value={responseObject && Object.values(responseObject)[1]} />
+              <RewardCard id={5} response={isResponseOn} date={"Em 30 dias:"} value={responseObject && Object.values(responseObject)[2]} />
+              <RewardCard id={5} response={isResponseOn} date={"Em 90 dias:"} value={responseObject && Object.values(responseObject)[3]} />
             </>
           ) : (
             responseObject && Object.keys(responseObject).map((item, index) => {
-              return <RewardCard key={index} response={isResponseOn} date={`Em ${item} dias`} value={Object.values(responseObject)[index]} />
+              return <RewardCard id={6} key={index} response={isResponseOn} date={`Em ${item} dias`} value={Object.values(responseObject)[index]} />
             })
           )}
         </div>
