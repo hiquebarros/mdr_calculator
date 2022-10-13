@@ -9,9 +9,9 @@ interface IRewardCardProps {
 
 const RewardCard = ({id, date, value, response}: IRewardCardProps) => {
     return (
-        <Container data-testid={id}>
+        <Container>
             <h3 style={{marginRight: "10px"}}>{date}</h3>
-            {response ? (<h3> R$ {value && (value / 100).toFixed(2).toString().replace('.', ",")}</h3>) : (null)}
+            {response ? (<h3 data-testid={id}> R$ {value && (value / 100).toFixed(2).toString().replace('.', ",")}</h3>) : (null)}
         </Container>
     );
 }
