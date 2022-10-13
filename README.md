@@ -1,10 +1,26 @@
-## Instruções front-end
+﻿# mdr_calculator
 
-Esse é um exemplo de como preparar a máquina para executar o teste localmente.
+***
 
-### Pré requisitos
+## Descrição
 
-- npm
+### O que é o mdr?
+
+A taxa MDR (Merchant Discount Rate) é a taxa administrativa cobrada sobre as transações realizadas em uma máquina de cartão, tanto no crédito quanto no débito. Essa taxa é cobrada dos lojistas pelas empresas que fornecem a maquininha, conhecidas como adquirentes.
+
+### O que é o projeto mdr_calculator?
+
+O mdr_calculator é uma calculadora de antecipação de pagamento. Na aplicação, os adquirentes podem calcular quanto custa antecipar o recebimento de transação, de acordo com um valor e uma taxa de mdr específica.
+
+***
+
+## Documentação
+
+>### Preparando o ambiente local para rodar a aplicação
+
+>#### Requisitos: Gerenciador de pacote e dependências (ex: YARN ou NPM)
+
+  - npm
 
   ```sh
   npm install npm@latest -g
@@ -18,13 +34,9 @@ Esse é um exemplo de como preparar a máquina para executar o teste localmente.
   npm install --global yarn
   ```
 
-### Instalação
-
-Siga as intruções abaixo para rodar a aplicação localmente
-
 1. Clone o repositório
    ```sh
-   git clone git@github.com:hiquebarros/sp1-frontend.git
+   git clone git@github.com:hiquebarros/mdr_calculator.git
    ```
 2. Instale os pacotes 
    ```sh
@@ -49,4 +61,8 @@ Siga as intruções abaixo para rodar a aplicação localmente
       ```sh
    npm start
    ```
+   
+Pronto, sua aplicação já deve estar pronta para ser utilizada.
+
+
 
